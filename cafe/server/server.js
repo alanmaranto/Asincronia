@@ -1,7 +1,7 @@
+const config = require('./config/config');
+
 const express = require("express");
 const app = express();
-
-const PORT = 3000;
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -40,6 +40,6 @@ app.delete("/usuario", function (req, res) {
   res.json("delete usuario");
 });
 
-app.listen(PORT, () => {
-  console.log(`Escuchando en el puerto: ${PORT}`);
+app.listen(config.PORT, () => {
+  console.log(`Escuchando en el puerto: ${config.PORT}`);
 });
