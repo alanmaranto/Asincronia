@@ -27,6 +27,11 @@
         user: 'Alan',
         message: 'Message from Alan'
       })
+
+      // Escuchar
+      socket.on('sendMessage', function(messageFromServer) {
+        console.log('Servidor', messageFromServer)
+      })
     </script>
   </body>
 </html>
