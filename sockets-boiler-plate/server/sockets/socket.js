@@ -13,9 +13,12 @@ io.on("connection", (client) => {
   });
 
   // Listening Client
-  client.on("sendMessage", (messageFromClient, cb) => {
-    console.log(messageFromClient);
-    if (messageFromClient.user) {
+  client.on("sendMessage", (data, cb) => {
+    console.log(data);
+
+    client.broadcast.emit('sendMessage', data)
+
+    /* if (messageFromClient.user) {
       cb({
         response: "Success",
       });
@@ -23,6 +26,6 @@ io.on("connection", (client) => {
       cb({
         response: "Error",
       });
-    }
+    } */
   });
 });
