@@ -28,8 +28,17 @@ io.on("connection", (client) => {
   });
 
   // Listening Client
-  client.on("sendMessage", (message) => {
-    console.log(message);
+  client.on("sendMessage", (messageFromClient, cb) => {
+    console.log(messageFromClient);
+    if (messageFromClient.user) {
+      cb({
+        response: "Success",
+      });
+    } else {
+      cb({
+        response: "Error",
+      });
+    }
   });
 });
 

@@ -18,20 +18,26 @@
         console.log("Conectado al servidor");
       });
 
-      socket.on('disconnect', function() {
-        console.log('Perdimos conexión con el servidor')
+      socket.on("disconnect", function () {
+        console.log("Perdimos conexión con el servidor");
       });
 
       // Enviar Información
-      socket.emit('sendMessage', {
-        user: 'Alan',
-        message: 'Message from Alan'
-      })
+      socket.emit(
+        "sendMessage",
+        {
+          // user: "Alan",
+          message: "Message from Alan",
+        },
+        function (responseFromServer) {
+          console.log("Respuesta Server;", responseFromServer);
+        }
+      );
 
       // Escuchar
-      socket.on('sendMessage', function(messageFromServer) {
-        console.log('Servidor', messageFromServer)
-      })
+      socket.on("sendMessage", function (messageFromServer) {
+        console.log("Servidor", messageFromServer);
+      });
     </script>
   </body>
 </html>
