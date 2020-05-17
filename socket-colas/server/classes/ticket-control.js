@@ -1,5 +1,5 @@
 const data = require("../data/data.json");
-const fs = require('fs');
+const fs = require("fs");
 
 class TicketControl {
   constructor() {
@@ -7,12 +7,26 @@ class TicketControl {
     this.today = new Date().getDate();
 
     if (data.today === this.today) {
+      this.lastTicket = data.lastTicket;
     } else {
-        this.resetCountdown();
+      this.resetCountdown();
     }
   }
 
+  nextTicket() {
+    this.lastTicket += 1;
+    this.saveFile();
+
+    return `Ticket ${this.lastTicket}`;
+  }
+
   resetCountdown() {
+    this.lastTicket = 0;
+    console.log("System reboot");
+    this.saveFile();
+  }
+
+  saveFile() {
     let jsonData = {
       lastTicket: this.lastTicket,
       today: this.today,
@@ -20,9 +34,7 @@ class TicketControl {
 
     let jsonDataString = JSON.stringify(jsonData);
 
-    fs.writeFileSync('./server/data/data.json', jsonDataString);
-
-    console.log('System reboot')
+    fs.writeFileSync("./server/data/data.json", jsonDataString);
   }
 }
 
