@@ -20,6 +20,10 @@ class TicketControl {
     return `Ticket ${this.lastTicket}`;
   }
 
+  getLastTicket() {
+    return `Ticket ${this.lastTicket}`;
+  }
+
   resetCountdown() {
     this.lastTicket = 0;
     console.log("System reboot");
