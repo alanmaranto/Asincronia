@@ -12,6 +12,7 @@ io.on("connection", (client) => {
 
   client.emit('actualState', {
     actualState: ticketControl.getLastTicket(),
+    lastFourTickets: ticketControl.getLastFourTicket()
   })
 
   client.on('attendTicket', (data, cb) => {

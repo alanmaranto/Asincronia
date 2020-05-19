@@ -29,7 +29,7 @@ class TicketControl {
 
     let ticket = new Ticket(this.lastTicket, null);
     this.tickets.push(ticket);
-    
+
     this.saveFile();
 
     return `Ticket ${this.lastTicket}`;
@@ -39,10 +39,14 @@ class TicketControl {
     return `Ticket ${this.lastTicket}`;
   }
 
+  getLastFourTicket() {
+    return this.lastFourTickets;
+  }
+
   attendTicket(deskAssignedToTicket) {
     // Verify if there are tickets to attend
     if (this.tickets.length === 0) {
-      return ('There are not more tickets')
+      return "There are not more tickets";
     }
 
     // Extract ticket number to break the relation of js with the objects pass as referenced
@@ -59,10 +63,10 @@ class TicketControl {
 
     // Verify if there are only 4 tickets in the array
     if (this.lastFourTickets.length > 4) {
-      this.lastFourTickets.splice(-1,1); // Delete the last element of the array
+      this.lastFourTickets.splice(-1, 1); // Delete the last element of the array
     }
 
-    console.log('ultimos 4', this.lastFourTickets);
+    console.log("ultimos 4", this.lastFourTickets);
 
     this.saveFile();
 
@@ -83,7 +87,7 @@ class TicketControl {
       lastTicket: this.lastTicket,
       today: this.today,
       tickets: this.tickets,
-      lastFourTickets :this.lastFourTickets,
+      lastFourTickets: this.lastFourTickets,
     };
 
     let jsonDataString = JSON.stringify(jsonData);
