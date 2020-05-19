@@ -28,7 +28,14 @@ socket.on("disconnect", function () {
 
 socket.on("actualState", function (data) {
   console.log(data);
-  updateHTML(data.lastFourTickets)
+  updateHTML(data.lastFourTickets);
+});
+
+socket.on("lastFourTickets", function (data) {
+  console.log(data);
+  var audio = new Audio('audio/new-ticket.mp3');
+  audio.play()
+  updateHTML(data.lastFourTickets);
 });
 
 function updateHTML(lastFourTickets) {

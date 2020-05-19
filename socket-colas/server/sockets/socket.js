@@ -28,5 +28,8 @@ io.on("connection", (client) => {
     cb(attendTicket);
 
     // Notify or updadte changes in last four tickets
+    client.broadcast.emit('lastFourTickets', {
+      lastFourTickets: ticketControl.getLastFourTicket()
+    })
   })
 });
