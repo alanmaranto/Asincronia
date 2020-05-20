@@ -3,6 +3,7 @@ class Users {
     this.users = [];
   }
 
+  // id socket
   addUser(id, name) {
     let user = {
       id,

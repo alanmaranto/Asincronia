@@ -1,0 +1,42 @@
+var socket = io();
+
+var params = new URLSearchParams(window.location.search);
+
+if (!params.has("name")) {
+  window.location = "index.html";
+  throw new Error("name is required");
+}
+
+var user = {
+  name: params.get("name"),
+};
+
+socket.on("connect", function () {
+  console.log("Conectado al servidor");
+
+  socket.emit("enterChat", user, function(response) {
+      console.log('Users connected',response)
+  });
+});
+
+// escuchar
+socket.on("disconnect", function () {
+  console.log("Perdimos conexión con el servidor");
+});
+
+// Enviar información
+socket.emit(
+  "sendMessage",
+  {
+    usuario: "Alan",
+    mensaje: "Hello",
+  },
+  function (resp) {
+    console.log("respuesta server: ", resp);
+  }
+);
+
+// Escuchar información
+socket.on("sendMessage", function (mensaje) {
+  console.log("Servidor:", mensaje);
+});
