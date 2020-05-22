@@ -14,8 +14,8 @@ var user = {
 socket.on("connect", function () {
   console.log("Conectado al servidor");
 
-  socket.emit("enterChat", user, function(response) {
-      console.log('Users connected',response)
+  socket.emit("enterChat", user, function (response) {
+    console.log("Users connected", response);
   });
 });
 
@@ -44,4 +44,9 @@ socket.on("createMessage", function (message) {
 // When an user enter or left chat
 socket.on("usersList", function (users) {
   console.log("Servidor:", users);
+});
+
+// Private Messages
+socket.on("privateMessage", function (message) {
+  console.log("Private message", message);
 });
