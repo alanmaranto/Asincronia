@@ -9,7 +9,6 @@ io.on("connection", (client) => {
 
   client.on("enterChat", (data, cb) => {
 
-    console.log('data', data)
     if (!data.name || !data.room) {
       return cb({
         error: true,
@@ -23,29 +22,29 @@ io.on("connection", (client) => {
     // socket id
     let allUsers = users.addUser(client.id, data.name, data.room);
 
-    client.broadcast.emit("usersList", users.getAllUsers());
+    client.broadcast.to(data.room).emit("usersList", users.getUsersByRoom(data.room));
 
     // return users connected to chat
-    cb(allUsers);
+    cb(users.getUsersByRoom(data.room));
   });
 
   client.on("createMessage", (data) => {
     // The client must sent the data
     let user = users.getUser(client.id);
     let message = createMessage(user.name, data.message);
-    client.broadcast.emit("createMessage", message);
+    client.broadcast.to(user.room).emit("createMessage", message);
   });
 
   // socket id has already id
   client.on("disconnect", () => {
     let deletedUser = users.deleteUser(client.id);
 
-    client.broadcast.emit(
+    client.broadcast.to(deletedUser.room).emit(
       "createMessage",
       createMessage("Admin", `${deletedUser.name} left`)
     );
 
-    client.broadcast.emit("usersList", users.getAllUsers());
+    client.broadcast.to(deletedUser.room).emit("usersList", users.getUsersByRoom(deletedUser.room))
   });
 
   // Private Messages
