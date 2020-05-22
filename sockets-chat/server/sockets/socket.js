@@ -8,15 +8,20 @@ io.on("connection", (client) => {
   console.log("Usuario conectado");
 
   client.on("enterChat", (data, cb) => {
-    if (!data.name) {
+
+    console.log('data', data)
+    if (!data.name || !data.room) {
       return cb({
         error: true,
-        message: "Name is required",
+        message: "Name and room are required",
       });
     }
 
+    // Join an user into a room
+    client.join(data.room);
+
     // socket id
-    let allUsers = users.addUser(client.id, data.name);
+    let allUsers = users.addUser(client.id, data.name, data.room);
 
     client.broadcast.emit("usersList", users.getAllUsers());
 
