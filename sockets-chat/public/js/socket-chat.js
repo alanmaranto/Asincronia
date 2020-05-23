@@ -17,6 +17,7 @@ socket.on("connect", function () {
 
   socket.emit("enterChat", user, function (response) {
     console.log("Users connected", response);
+    renderUsers(response)
   });
 });
 
@@ -25,18 +26,6 @@ socket.on("disconnect", function () {
   console.log("Perdimos conexión con el servidor");
 });
 
-// Enviar información
-/* socket.emit(
-  "sendMessage",
-  {
-    usuario: "Alan",
-    mensaje: "Hello",
-  },
-  function (resp) {
-    console.log("respuesta server: ", resp);
-  }
-);
- */
 // Escuchar información
 socket.on("createMessage", function (message) {
   console.log("Servidor:", message);
@@ -45,6 +34,7 @@ socket.on("createMessage", function (message) {
 // When an user enter or left chat
 socket.on("usersList", function (users) {
   console.log("Servidor:", users);
+  renderUsers(users)
 });
 
 // Private Messages
