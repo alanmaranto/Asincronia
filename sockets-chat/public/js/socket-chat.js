@@ -26,7 +26,7 @@ socket.on("disconnect", function () {
 });
 
 // Enviar información
-socket.emit(
+/* socket.emit(
   "sendMessage",
   {
     usuario: "Alan",
@@ -36,7 +36,7 @@ socket.emit(
     console.log("respuesta server: ", resp);
   }
 );
-
+ */
 // Escuchar información
 socket.on("createMessage", function (message) {
   console.log("Servidor:", message);

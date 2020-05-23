@@ -20,7 +20,7 @@ io.on("connection", (client) => {
     client.join(data.room);
 
     // socket id
-    let allUsers = users.addUser(client.id, data.name, data.room);
+    users.addUser(client.id, data.name, data.room);
 
     client.broadcast.to(data.room).emit("usersList", users.getUsersByRoom(data.room));
 
