@@ -1,16 +1,23 @@
-const fs = require("fs");
-// const fs = require('express');
-// const fs = require('../');
+const { createFile } = require("./multiplicar/multiplicar");
 
-let base = 6;
-let data = '';
+let base = 10;
 
-for (let i = 1; i <= 10; i++) {
-  data += `${base} * ${i} = ${base * i}\n`;
-}
+// with Promise
+/* createFile(base)
+  .then((file) => {
+    console.log(`Archivo creado: ${file}`);
+  })
+  .catch((err) => console.log(err)); */
 
-fs.writeFile(`tablas/tabla${base}.txt`, data, (err) => {
-  if (err) throw err;
+// with async-await
+const createdNumber = async () => {
+  try {
+    const number = await createFile(base);
+    console.log(number);
+    return number;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-  console.log("El archivo ha sido creado");
-});
+createdNumber();
