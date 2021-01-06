@@ -1,6 +1,10 @@
 const { createFile } = require("./multiplicar/multiplicar");
 
-let base = 10;
+let argv = process.argv;
+let param = argv[2];
+let base = param.split("=")[1];
+
+console.log(base);
 
 // with Promise
 /* createFile(base)
@@ -21,3 +25,6 @@ const createdNumber = async () => {
 };
 
 createdNumber();
+
+// comando a ejecutar
+//node app --base={tu_numero}
