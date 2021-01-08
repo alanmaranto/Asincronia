@@ -1,17 +1,26 @@
+const argv = require('yargs')
+        .command('listar', 'Imprime en consola la tabla de multiplicar', {
+          base: {
+            demand: true,
+            alias: 'b'
+          },
+          limit: {
+            alias: 'l',
+            default: 10
+          }
+        })
+        .help()
+        .argv;
 const { createFile } = require("./multiplicar/multiplicar");
 
-let argv = process.argv;
-let param = argv[2];
-let base = param.split("=")[1];
 
-console.log(base);
+// let param = argv[2];
+// let base = param.split("=")[1];
 
-// with Promise
-/* createFile(base)
-  .then((file) => {
-    console.log(`Archivo creado: ${file}`);
-  })
-  .catch((err) => console.log(err)); */
+// console.log(base);
+
+console.log(argv.base)
+console.log(argv.limit)
 
 // with async-await
 const createdNumber = async () => {
@@ -27,4 +36,8 @@ const createdNumber = async () => {
 createdNumber();
 
 // comando a ejecutar
-//node app --base={tu_numero}
+//node app -l=20 -b 5  [con Shortcuts]
+//node app --limit=20 --base 5  [sin shortcuts]
+//node app -b 5   [sin enviar el limite, tomando el valor default]
+// node app listar --help   [help de todos los comandos]
+// node app --help   [help de todos los comandos]
